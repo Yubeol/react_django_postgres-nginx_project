@@ -1,0 +1,63 @@
+volumes:
+  react-dist:
+  postgres-data:
+
+services:
+
+  # PostgreSQL DB
+  db:
+    image: postgres:16
+    container_name: postgres-db
+    environment:
+      POSTGRES_DB: mydb
+      POSTGRES_USER: kogo
+      POSTGRES_PASSWORD: math1106
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: always
+
+  # React(Vite) 빌드 전용 컨테이너
+  frontend:
+    build:
+      context: ./frontend
+    container_name: react-builder
+    volumes:
+      - react-dist:/dist
+    command: >
+      sh -c "
+      npm ci &&
+      npm run build &&
+      cp -r dist/. /dist
+      "
+
+  # Django API 서버
+  backend:
+    build:
+      context: ./backend
+    container_name: backend
+    expose:
+      - "8000"
+    depends_on:
+      - db
+    restart: always
+    environment:
+      DB_HOST: db
+      DB_NAME: mydb
+      DB_USER: kogo
+      DB_PASSWORD: math1106
+
+  # Nginx 웹 서버
+  nginx:
+    build:
+      context: ./nginx
+    container_name: react-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - react-dist:/usr/share/nginx/html
+    depends_on:
+      - frontend
+      - backend
+    restart: always
