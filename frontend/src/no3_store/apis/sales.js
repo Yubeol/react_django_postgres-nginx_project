@@ -1,53 +1,43 @@
-// import axios from "axios";
-import { rootApi } from "./root.api";
+import { useQuery } from "@tanstack/react-query"
+import { useAllGetUser } from "./useUser"
+import { useAllGetProduct } from "./useProduct"
+import { salesAllGetApi } from "../apis/sales"
 
-// const BASE_URL = "http://127.0.0.1:8000";
 
-export const salesAllGetApi = async () => {
-    try {
-        // const response = await axios.get(`${BASE_URL}/sales`)
-        const response = await rootApi.get("/sales")
-        return response.data
-    } catch(error) {
-        throw error
-    }
+
+export const useAllGetSales = () => {
+    return useQuery({
+        queryKey: ["sales"],
+        queryFn: salesAllGetApi
+    })
 }
 
-export const salesGetApi = async (id) => {
-    try {
-        // const response = await axios.get(`${BASE_URL}/sales/${id}`)
-        const response = await rootApi.get(`/sales/${id}`)
-        return response.data
-    } catch(error) {
-        throw error
-    }
-}
+export const useGetSales = () => {
+    const { data: userList = [] } = useAllGetUser()
+    const { data: productList = [] } = useAllGetProduct()
+    const { data: salesList = [], isLoading, error } = useAllGetSales()
 
-export const salesPostApi = async (dataObj) => {
-    try {
-        // const response = await axios.post(`${BASE_URL}/sales`, dataObj)
-        const response = await rootApi.post("/sales", dataObj)
-        return response.data
-    } catch(error) {
-        throw error
-    }
-}
+    const userObj = {}
+    userList.forEach(item => {
+        userObj[item.id] = item
+    })
 
-export const salesPutApi = async (dataObj) => {
-    try {
-        // const response = await axios.put(`${BASE_URL}/sales/${dataObj.id}`, dataObj)
-        const response = await rootApi.put(`/sales/${dataObj.id}`, dataObj)
-        return response.data
-    } catch(error) {
-        throw error
-    }
-}
+    const productObj = {}
+    productList.forEach(item => {
+        productObj[item.id] = item
+    })
 
-export const salesDeleteApi = async (id) => {
-    try {
-        // await axios.delete(`${BASE_URL}/sales/${id}`)
-        await rootApi.delete(`/sales/${id}`)
-    } catch(error) {
-        throw error
-    }
+    const rowData = salesList.map(item => {
+        // const product = productObj[item.product_id]
+        const product = productObj[item.productId]
+        return {
+            ...item,
+            // user_name: userObj[item.user_id]?.username ?? "알수없음",
+            user_name: userObj[item.userId]?.username ?? "알수없음",
+            // product_name: product?.product_name ?? "알수없음",
+            product_name: product?.productName ?? "알수없음",
+        }
+    })
+
+    return { rowData, isLoading, error }
 }

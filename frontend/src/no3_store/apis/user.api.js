@@ -1,46 +1,61 @@
-import { rootApi } from "./root.api";
+import apolloClient from '../../no0_context/apolloClient';
+import { GET_USERS, LOGIN, CREATE_USER, GET_ME } from '../graphql/user';
 
 export const userAllGetApi = async () => {
     try {
-        const response = await rootApi.get("/users/")
-        console.log(response.data)
-        return response.data
-    } catch(error) {
-        return error
+        const { data } = await apolloClient.query({
+            query: GET_USERS,
+            fetchPolicy: 'network-only',
+        });
+        console.log(data.users);
+        return data.users;
+    } catch (error) {
+        return error;
     }
-}
+};
 
 export const userLoginApi = async (loginUser) => {
     try {
-        const response = await rootApi.post(
-            "/auth/login/",
-            {
-                username: loginUser.username,
-                password: loginUser.password,
-            }
-        );
-        return response.data;
+        const { data } = await apolloClient.mutate({
+            mutation: LOGIN,
+            variables: {
+                input: {
+                    name: loginUser.username,
+                    password: loginUser.password,
+                },
+            },
+        });
+        return data.login;
     } catch (error) {
         throw new Error(
-            error.response?.data?.detail ??
-            "로그인에 실패했습니다."
+            error.message ?? "로그인에 실패했습니다."
         );
     }
 };
 
 export const userRegisterApi = async (userObj) => {
     try {
-        const response = await rootApi.post("/users/create/", userObj);
-        return response.data;
+        const { data } = await apolloClient.mutate({
+            mutation: CREATE_USER,
+            variables: {
+                input: {
+                    ...userObj,
+                    age: Number(userObj.age),
+                },
+            },
+        });
+        return data.createUser;
     } catch (error) {
         throw new Error(
-            error.response?.data?.detail ??
-            "회원가입에 실패했습니다."
+            error.message ?? "회원가입에 실패했습니다."
         );
     }
 };
 
 export const currentUserApi = async () => {
-    const response = await rootApi.get("/auth/me/");
-    return response.data;
+    const { data } = await apolloClient.query({
+        query: GET_ME,
+        fetchPolicy: 'network-only',
+    });
+    return data.me;
 };

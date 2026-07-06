@@ -32,8 +32,7 @@ export const useLoginUser = () => {
     return useMutation({
         mutationFn: userLoginApi,
         onSuccess: (data) => {
-            // localStorage.setItem("accessToken", token.access_token);
-            localStorage.setItem("accessToken", data.token);
+            localStorage.setItem("accessToken", data.accessToken);
             queryClient.invalidateQueries({ queryKey: ["currentUser"] })
         }
     })

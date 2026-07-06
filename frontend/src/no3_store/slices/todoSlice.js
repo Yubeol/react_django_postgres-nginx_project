@@ -4,7 +4,7 @@ import {
     todosAllPostApi,
     todosAllPutApi,
     todosAllDeleteApi
-} from "../apis/todos.api";
+} from "../apis/todos.api.js";
 
 export const todosAllGetSlice = createAsyncThunk(
     "todosAllGetSlice",
