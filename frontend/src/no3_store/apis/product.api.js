@@ -1,4 +1,4 @@
-import apolloClient from '../../no0_context/apolloClient';
+import apolloClient from '../graphql/apolloClient.js';
 import {
     GET_PRODUCTS,
     GET_PRODUCT_BY_ID,

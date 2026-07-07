@@ -1,4 +1,4 @@
-import apolloClient from '../../no0_context/apolloClient';
+import apolloClient from '../graphql/apolloClient.js';
 import { GET_USERS, CREATE_USER } from '../graphql/user';
 import { LOGIN, ME } from '../graphql/auth';
 
