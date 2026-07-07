@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { useGetEmployee } from '../../no3_store/hooks/useEmployee'
 
 const LABELS = { id: 'ID', name: '이름', email: '이메일', job: '직무', pay: '급여' }
+const FIELDS = Object.keys(LABELS)
 
 const EmployeeTable = ({selectedId}) => {
     const { data: emp, isLoading, error } = useGetEmployee(selectedId)
@@ -12,20 +13,20 @@ const EmployeeTable = ({selectedId}) => {
         <TableWrap>
             <Table>
                 <thead>
-                    <tr>
-                        {emp && Object.keys(emp).map(key => (
-                            <Th key={key}>{LABELS[key] || key}</Th>
-                        ))}
-                    </tr>
+                <tr>
+                    {emp && FIELDS.map(key => (
+                        <Th key={key}>{LABELS[key]}</Th>
+                    ))}
+                </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        {emp && Object.entries(emp).map(([key, value]) => (
-                            <Td key={key}>
-                                {key === 'pay' ? `${Number(value).toLocaleString()}만원` : value}
-                            </Td>
-                        ))}
-                    </tr>
+                <tr>
+                    {emp && FIELDS.map(key => (
+                        <Td key={key}>
+                            {key === 'pay' ? `${Number(emp[key]).toLocaleString()}만원` : emp[key]}
+                        </Td>
+                    ))}
+                </tr>
                 </tbody>
             </Table>
         </TableWrap>

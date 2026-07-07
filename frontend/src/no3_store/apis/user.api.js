@@ -1,5 +1,6 @@
 import apolloClient from '../../no0_context/apolloClient';
-import { GET_USERS, LOGIN, CREATE_USER, GET_ME } from '../graphql/user';
+import { GET_USERS, CREATE_USER } from '../graphql/user';
+import { LOGIN, ME } from '../graphql/auth';
 
 export const userAllGetApi = async () => {
     try {
@@ -7,7 +8,6 @@ export const userAllGetApi = async () => {
             query: GET_USERS,
             fetchPolicy: 'network-only',
         });
-        console.log(data.users);
         return data.users;
     } catch (error) {
         return error;
@@ -35,13 +35,11 @@ export const userLoginApi = async (loginUser) => {
 
 export const userRegisterApi = async (userObj) => {
     try {
+        const { username, password, age, email, city } = userObj;
         const { data } = await apolloClient.mutate({
             mutation: CREATE_USER,
             variables: {
-                input: {
-                    ...userObj,
-                    age: Number(userObj.age),
-                },
+                input: { username, password, age: Number(age), email, city },
             },
         });
         return data.createUser;
@@ -54,7 +52,7 @@ export const userRegisterApi = async (userObj) => {
 
 export const currentUserApi = async () => {
     const { data } = await apolloClient.query({
-        query: GET_ME,
+        query: ME,
         fetchPolicy: 'network-only',
     });
     return data.me;

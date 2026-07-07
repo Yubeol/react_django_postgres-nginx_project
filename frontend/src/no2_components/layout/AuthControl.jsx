@@ -1,5 +1,5 @@
 import React from 'react'
-import { useCurrentUser } from '../../no3_store/hooks/useUser'
+import { useCurrentUser } from '../../no3_store/hooks/useAuth'
 
 const AuthControl = ({
                          message = "로그인 후 이용 가능합니다."

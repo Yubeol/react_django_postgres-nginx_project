@@ -34,9 +34,10 @@ export const productGetApi = async (id) => {
 
 export const productPostApi = async (dataObj) => {
     try {
+        const { productName, color, price, salePrice, categoryCode } = dataObj;
         const { data } = await apolloClient.mutate({
             mutation: CREATE_PRODUCT,
-            variables: { input: dataObj },
+            variables: { input: { productName, color, price, salePrice, categoryCode } },
         });
         return data.createProduct;
     } catch (error) {
@@ -46,10 +47,10 @@ export const productPostApi = async (dataObj) => {
 
 export const productPutApi = async (dataObj) => {
     try {
-        const { id, ...input } = dataObj;
+        const { id, productName, color, price, salePrice, categoryCode } = dataObj;
         const { data } = await apolloClient.mutate({
             mutation: UPDATE_PRODUCT,
-            variables: { id: Number(id), input },
+            variables: { id: Number(id), input: { productName, color, price, salePrice, categoryCode } },
         });
         return data.updateProduct;
     } catch (error) {

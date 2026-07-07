@@ -34,9 +34,10 @@ export const employeeGetApi = async (id) => {
 
 export const employeePostApi = async (dataObj) => {
     try {
+        const { name, email, job, pay } = dataObj;
         const { data } = await apolloClient.mutate({
             mutation: CREATE_EMPLOYEE,
-            variables: { input: dataObj },
+            variables: { input: { name, email, job, pay: Number(pay) } },
         });
         return data.createEmployee;
     } catch (error) {
@@ -46,10 +47,10 @@ export const employeePostApi = async (dataObj) => {
 
 export const employeePutApi = async (dataObj) => {
     try {
-        const { id, ...input } = dataObj;
+        const { id, name, email, job, pay } = dataObj;
         const { data } = await apolloClient.mutate({
             mutation: UPDATE_EMPLOYEE,
-            variables: { id: Number(id), input },
+            variables: { id: Number(id), input: { name, email, job, pay: Number(pay) } },
         });
         return data.updateEmployee;
     } catch (error) {

@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import styled from 'styled-components'
 import {useNavigate} from 'react-router-dom'
-import {useCurrentUser, useLogout} from '../../no3_store/hooks/useUser'
+import {useCurrentUser, useLogout} from '../../no3_store/hooks/useAuth'
 import LoginFormModal from '../user/LoginFormModal'
 import RegisterFormModal from '../user/RegisterFormModal'
 

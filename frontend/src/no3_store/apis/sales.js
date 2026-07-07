@@ -1,43 +1,27 @@
-import { useQuery } from "@tanstack/react-query"
-import { useAllGetUser } from "./useUser"
-import { useAllGetProduct } from "./useProduct"
-import { salesAllGetApi } from "../apis/sales"
+import apolloClient from '../../no0_context/apolloClient';
+import { GET_SALES, GET_SALE_BY_ID } from '../graphql/sales';
 
+export const salesAllGetApi = async () => {
+    try {
+        const { data } = await apolloClient.query({
+            query: GET_SALES,
+            fetchPolicy: 'network-only',
+        });
+        return data.sales;
+    } catch (error) {
+        throw error;
+    }
+};
 
-
-export const useAllGetSales = () => {
-    return useQuery({
-        queryKey: ["sales"],
-        queryFn: salesAllGetApi
-    })
-}
-
-export const useGetSales = () => {
-    const { data: userList = [] } = useAllGetUser()
-    const { data: productList = [] } = useAllGetProduct()
-    const { data: salesList = [], isLoading, error } = useAllGetSales()
-
-    const userObj = {}
-    userList.forEach(item => {
-        userObj[item.id] = item
-    })
-
-    const productObj = {}
-    productList.forEach(item => {
-        productObj[item.id] = item
-    })
-
-    const rowData = salesList.map(item => {
-        // const product = productObj[item.product_id]
-        const product = productObj[item.productId]
-        return {
-            ...item,
-            // user_name: userObj[item.user_id]?.username ?? "알수없음",
-            user_name: userObj[item.userId]?.username ?? "알수없음",
-            // product_name: product?.product_name ?? "알수없음",
-            product_name: product?.productName ?? "알수없음",
-        }
-    })
-
-    return { rowData, isLoading, error }
-}
+export const salesGetApi = async (id) => {
+    try {
+        const { data } = await apolloClient.query({
+            query: GET_SALE_BY_ID,
+            variables: { id: Number(id) },
+            fetchPolicy: 'network-only',
+        });
+        return data.sale;
+    } catch (error) {
+        throw error;
+    }
+};

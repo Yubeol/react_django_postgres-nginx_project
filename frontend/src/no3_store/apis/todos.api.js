@@ -21,9 +21,10 @@ export const todosAllGetApi = async () => {
 
 export const todosAllPostApi = async (dataObj) => {
     try {
+        const { subject, checked } = dataObj;
         const { data } = await apolloClient.mutate({
             mutation: CREATE_TODO,
-            variables: { input: dataObj },
+            variables: { input: { subject, checked } },
         });
         return data.createTodo;
     } catch (error) {
@@ -33,10 +34,10 @@ export const todosAllPostApi = async (dataObj) => {
 
 export const todosAllPutApi = async (dataObj) => {
     try {
-        const { id, ...input } = dataObj;
+        const { id, subject, checked } = dataObj;
         const { data } = await apolloClient.mutate({
             mutation: UPDATE_TODO,
-            variables: { id: Number(id), input },
+            variables: { id: Number(id), input: { subject, checked } },
         });
         return data.updateTodo;
     } catch (error) {

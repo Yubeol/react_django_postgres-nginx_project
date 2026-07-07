@@ -1,6 +1,6 @@
 import React from 'react'
 import ProductTable from '../../no2_components/sales/ProductTable'
-import { useCurrentUser } from '../../no3_store/hooks/useUser'
+import { useCurrentUser } from '../../no3_store/hooks/useAuth'
 import AuthControl from '../../no2_components/layout/AuthControl';
 
 const ProductPage = () => {
