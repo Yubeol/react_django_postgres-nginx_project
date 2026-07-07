@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { MdCheckBox, MdCheckBoxOutlineBlank, MdRemoveCircleOutline } from "react-icons/md"
-import { usePutUpdateTodo, useDeleteTodo } from '../../no3_store/hooks/useTodos'
+import { usePutUpdateTodo, useDeleteTodo } from '../../no3_store/useHooks/useTodos'
 
 const TodoListChild = ({ item }) => {
     const updateMutation = usePutUpdateTodo()

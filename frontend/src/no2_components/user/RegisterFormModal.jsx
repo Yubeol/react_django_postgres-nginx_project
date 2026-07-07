@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Modal, Input, Typography,Divider } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
-import { useRegisterUser } from '../../no3_store/hooks/useUser'
+import { useRegisterUser } from '../../no3_store/useHooks/useUser'
 
 const { Title } = Typography;
 

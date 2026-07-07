@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useGetEmployee, usePutUpdateEmployee } from '../../no3_store/hooks/useEmployee'
+import { useGetEmployee, usePutUpdateEmployee } from '../../no3_store/useHooks/useEmployee'
 import { FormCard, FormTitle, Grid, Field, Label, Input, SubmitBtn } from './EmployeeRegister'
 import styled from 'styled-components'
 

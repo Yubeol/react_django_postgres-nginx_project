@@ -1,7 +1,7 @@
 import React from 'react'
 import TodoListChild from './TodoListChild'
 import styled from 'styled-components'
-import { useAllGetTodo } from '../../no3_store/hooks/useTodos'
+import { useAllGetTodo } from '../../no3_store/useHooks/useTodos'
 
 const TodoList = () => {
     const { data: todoList = [], isLoading, error } = useAllGetTodo()

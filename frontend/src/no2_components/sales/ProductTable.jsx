@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react'
-import { useAllGetProduct, useDeleteProduct, usePostRegisterProduct, usePutUpdateProduct } from '../../no3_store/hooks/useProduct'
+import { useAllGetProduct, useDeleteProduct, usePostRegisterProduct, usePutUpdateProduct } from '../../no3_store/useHooks/useProduct'
 import { AgGridReact } from 'ag-grid-react'
 import ProductModal from './ProductModal'
 import styled from 'styled-components'

@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import {
     usePostRegisterEmployee
-} from "../../no3_store/hooks/useEmployee";
+} from "../../no3_store/useHooks/useEmployee";
 
 const initialEmp = { id: '', name: '', email: '', job: '', pay: '' }
 

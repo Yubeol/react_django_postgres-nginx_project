@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDashoard } from '../../no3_store/hooks/useDashboard';
+import { useDashoard } from '../../no3_store/useHooks/useDashboard';
 import styled from 'styled-components'
 import {
     DollarOutlined,

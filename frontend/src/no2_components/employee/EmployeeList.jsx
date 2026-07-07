@@ -2,7 +2,7 @@ import React, { useEffect } from "react"
 import styled from 'styled-components'
 import {
     useAllGetEmployee, useDeleteEmployee
-} from '../../no3_store/hooks/useEmployee'
+} from '../../no3_store/useHooks/useEmployee'
 
 const EmployeeList = ({ selectedId, setSelectedId }) => {
 

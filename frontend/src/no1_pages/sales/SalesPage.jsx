@@ -1,6 +1,6 @@
 import React from 'react'
 import SalesTable from '../../no2_components/sales/SalesTable.jsx'
-import { useCurrentUser } from '../../no3_store/hooks/useAuth.js';
+import { useCurrentUser } from '../../no3_store/useHooks/useAuth.js';
 import AuthControl from '../../no2_components/layout/AuthControl.jsx';
 
 const SalesPage = () => {

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useGetEmployee } from '../../no3_store/hooks/useEmployee'
+import { useGetEmployee } from '../../no3_store/useHooks/useEmployee'
 
 const LABELS = { id: 'ID', name: '이름', email: '이메일', job: '직무', pay: '급여' }
 const FIELDS = Object.keys(LABELS)

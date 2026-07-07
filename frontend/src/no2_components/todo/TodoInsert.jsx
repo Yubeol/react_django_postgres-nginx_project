@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { useAllPostTodo } from '../../no3_store/hooks/useTodos'
+import { useAllPostTodo } from '../../no3_store/useHooks/useTodos'
 
 const TodoInsert = () => {
     const [subject, setSubject] = useState('')

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useGetSales } from '../../no3_store/hooks/useSales'
+import { useGetSales } from '../../no3_store/useHooks/useSales'
 import { AgGridReact } from 'ag-grid-react';
 import styled from 'styled-components'
 import { MdBarChart } from 'react-icons/md'

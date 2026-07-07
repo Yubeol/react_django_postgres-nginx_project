@@ -7,7 +7,7 @@ import styled from 'styled-components'
 import { MdPersonAdd, MdEdit, MdDeleteOutline, MdPeople } from 'react-icons/md'
 import {
     useAllGetEmployee, useDeleteEmployee
-} from '../no3_store/hooks/useEmployee'
+} from '../no3_store/useHooks/useEmployee'
 
 const EmployeePage = () => {
     const [selectedId, setSelectedId] = useState("");
